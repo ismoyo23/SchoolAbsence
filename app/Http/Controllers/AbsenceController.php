@@ -29,9 +29,11 @@ class AbsenceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($nip)
     {
-        //
+        DB::table('users')->insert(
+            ['nik' => $nip, 'date' => Date('Y-m-d')]
+        );
     }
 
     /**

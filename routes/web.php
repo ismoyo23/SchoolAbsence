@@ -21,5 +21,5 @@ Route::get('/change', 'AbsenceController@edit');
 Route::get('/user', 'AuthController@user');
 Route::get('/deleteUser/{id}', 'AuthController@destroy');
 
-
+Route::get('/absence/{nip}', 'AbsenceController@create');
 Route::post('/ProcessLogin', 'AuthController@store');
