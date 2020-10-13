@@ -31,7 +31,7 @@ class AbsenceController extends Controller
      */
     public function create($nip)
     {
-        DB::table('users')->insert(
+        DB::table('absence')->insert(
             ['nik' => $nip, 'date' => Date('Y-m-d')]
         );
     }
@@ -53,9 +53,10 @@ class AbsenceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($nip)
     {
-        //
+        $show = DB::table('absence')->where('nik', '=' ,$nip)->get();
+        return response()->json($show, 201);
     }
 
     /**

@@ -17,9 +17,12 @@ Route::get('/', 'AuthController@index');
 Route::get('/Logout','AuthController@logout');
 Route::get('/Admin', 'HomeController@index');
 Route::get('/absence', 'AbsenceController@index');
+Route::get('/absenceGet/{nip}', 'AbsenceController@show');
 Route::get('/change', 'AbsenceController@edit');
 Route::get('/user', 'AuthController@user');
 Route::get('/deleteUser/{id}', 'AuthController@destroy');
-
+Route::get('/createAbsence/{nip}', 'AbsenceController@create');
 Route::get('/absence/{nip}', 'AbsenceController@create');
 Route::post('/ProcessLogin', 'AuthController@store');
+
+Route::get('/seeUser/{nik}', 'AuthController@seeUser');

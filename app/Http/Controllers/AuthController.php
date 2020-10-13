@@ -69,9 +69,10 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function seeUser($nik)
     {
-        //
+        $data = DB::table('users')->where('nik', '=', $nik)->get();
+        return json_encode($data);
     }
 
     /**
