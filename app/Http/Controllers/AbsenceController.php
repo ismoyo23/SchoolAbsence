@@ -16,12 +16,14 @@ class AbsenceController extends Controller
         $date = $request->input('date');
         $majorsParams = $request->input('majors');
         $classParams = $request->input('class');
+        $letterParams = $request->input('letter');
         $class = DB::table('class')->get();
         $majors = DB::table('majors')->get();
-        $absence = DB::table('absencestudent')->join('class','class.id_class', '=', 'absencestudent.id_class')->join('majors' ,'majors.id', '=', 'absencestudent.id_majors')->select(DB::raw('count(*) as count, absencestudent.status'))->groupBy('absencestudent.status')->where('absencestudent.date', 'LIKE', '%'.$date.'%')->where('majors.name_majors', '=', $majorsParams)->where('class.name_class', '=', $classParams)->orderBy('absencestudent.status', 'asc')->get();
+        $letter = DB::table('letter')->get();
+        $absence = DB::table('absence')->join('class','class.id_class', '=', 'absence.id_class')->join('majors' ,'majors.id', '=', 'absence.id_majors')->select(DB::raw('count(*) as count, absence.status'))->groupBy('absence.status')->where('absence.date', 'LIKE', '%'.$date.'%')->where('majors.name_majors', '=', $majorsParams)->where('class.name_class', '=', $classParams)->where('absence.letter', '=', $letterParams)->orderBy('absence.status', 'asc')->get();
        
-        $tableAbsence = DB::table('absencestudent')->join('class', 'class.id_class', '=', 'absencestudent.id_class')->join('users', 'users.id_user', '=', 'absencestudent.id_user')->join('majors', 'majors.id', '=', 'absencestudent.id_majors')->select('users.*', 'absencestudent.*', 'majors.*', 'class.*')->where('date', 'LIKE', '%'.$date.'%')->get();
-        return view('Absence', ['class' => $class, 'majors' => $majors, 'tableAbsence' => $tableAbsence, 'absence' => $absence, 'date' => $date, 'majorsParams' => $majorsParams, 'classParams' => $classParams]);
+        $tableAbsence = DB::table('absence')->join('class', 'class.id_class', '=', 'absence.id_class')->join('users', 'users.nik', '=', 'absence.nik')->join('majors', 'majors.id', '=', 'absence.id_majors')->select('users.*', 'absence.*', 'majors.*', 'class.*')->where('date', 'LIKE', '%'.$date.'%')->where('users.letter', '=', $letterParams)->get();
+        return view('Absence', ['class' => $class, 'majors' => $majors, 'tableAbsence' => $tableAbsence, 'absence' => $absence, 'date' => $date, 'majorsParams' => $majorsParams, 'classParams' => $classParams, 'letter' => $letter, 'letterParams' => $letterParams]);
     }
 
     /**
@@ -29,10 +31,10 @@ class AbsenceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($nip)
+    public function create($nip, $majors, $class, $letter)
     {
         DB::table('absence')->insert(
-            ['nik' => $nip, 'date' => Date('Y-m-d')]
+            ['nik' => $nip, 'date' => Date('Y-m-d'), 'id_majors' => $majors, 'id_class' => $class, 'status' => 'masuk', 'letter' => $letter]
         );
     }
 
@@ -70,7 +72,7 @@ class AbsenceController extends Controller
         $date = $request->input('date');
         $majorsParams = $request->input('majors');
         $classParams = $request->input('class');
-        DB::table('absencestudent')
+        DB::table('absence')
               ->where('id_absence', $request->id)
               ->update(['status' => $request->status]);
         return redirect('/absence?date='.$request->date.'&majors='.$majorsParams.'&class='.$classParams);

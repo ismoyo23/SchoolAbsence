@@ -18,14 +18,14 @@ class HomeController extends Controller
         if (session('auth') == null) {
             return redirect('/');
         }else{
-            if (session('auth')->role == 1) {
+            if (session('auth')->role == 1 || session('auth')->role == 2 || session('auth')->role == 3) {
                 $majors = $request->input('majors');
         $date = $request->input('date');
         $data = DB::table('majors')->get();
         $absenceCount = DB::table('absencestudent')->join('class', 'class.id_class', '=', 'absencestudent.id_class')->join('majors', 'majors.id', '=', 'absencestudent.id_majors')->join('users', 'users.id_user', '=', 'absencestudent.id_user')->select(DB::raw('count(*) as count, class.name_class'))->groupBy('class.name_class')->where('absencestudent.date', 'LIKE', '%'.$date.'%')->where('status', '=', 'masuk')->where('majors.name_majors', $majors)->get();
         return view('Home', ['data' => $data, 'date' => $date, 'majors' => $majors, 'absenceCount' => $absenceCount]);
         }else{
-                echo "admin utama";
+                return redirect('/')->with(['error' => 'Akses di tolak']);;
             }
         }
         

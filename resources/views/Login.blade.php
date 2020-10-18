@@ -70,9 +70,7 @@
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
-          <div class="col-4">
-            <a href="" type="submit" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-block">QR</a>
-          </div>
+          
           <!-- /.col -->
         </div>
       </form>

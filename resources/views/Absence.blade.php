@@ -62,6 +62,20 @@
                         </select>
                         
                         </div>
+                        <div class="col-md-3">
+                        <select style='margin-top: 30px' name='majors' class="form-control" id="exampleFormControlSelect1">
+                          <?php foreach ($letter as $key): ?>
+                            <?php if ($key->letter == $letterParams): ?>
+                              <option selected><?php echo $key->letter; ?></option>
+                              <?php else: ?>
+                                <option><?php echo $key->letter; ?></option>
+                            <?php endif ?>
+                            
+                          <?php endforeach ?>
+                          
+                        </select>
+                        
+                        </div>
                         <div class="col-md-2" style='margin-top: 30px'>
                           <button type="submit" class="btn btn-light"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
@@ -78,6 +92,7 @@
                           <input type="date" style='width: 300px;' name='date' data-date-format="Y-m-d" value="<?php echo $date; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                           <input type="hidden" name="majors" value='<?php echo $majorsParams ?>'>
                           <input type="hidden" name="class" value="<?php echo $classParams ?>">
+                          <input type="hidden" name="letter" value="<?php echo $letterParams ?>">
                           <button type="submit" class="btn btn-light"><i class="fa fa-search" aria-hidden="true"></i></button>
                           </div>
                           </div>

@@ -40,7 +40,7 @@ class AuthController extends Controller
     {
         $auth = DB::table('users')->where('nik', $request->nik)->get();
         if (count($auth) == null) {
-            return redirect('/')->with(['error' => 'Belum Terdaftar']);;
+            return redirect('/')->with(['error' => 'Belum Terdaftar']);
         }else{
             foreach ($auth as $key) {
                 $session = $request->session()->put('auth', $key);
@@ -71,7 +71,7 @@ class AuthController extends Controller
      */
     public function seeUser($nik)
     {
-        $data = DB::table('users')->where('nik', '=', $nik)->get();
+        $data = DB::table('users')->where('nik','=', $nik)->get();
         return json_encode($data);
     }
 
