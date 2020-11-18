@@ -20,9 +20,9 @@ class AbsenceController extends Controller
         $class = DB::table('class')->get();
         $majors = DB::table('majors')->get();
         $letter = DB::table('letter')->get();
-        $absence = DB::table('absence')->join('class','class.id_class', '=', 'absence.id_class')->join('majors' ,'majors.id', '=', 'absence.id_majors')->select(DB::raw('count(*) as count, absence.status'))->groupBy('absence.status')->where('absence.date', 'LIKE', '%'.$date.'%')->where('majors.name_majors', '=', $majorsParams)->where('class.name_class', '=', $classParams)->where('absence.letter', '=', $letterParams)->orderBy('absence.status', 'asc')->get();
+        $absence = DB::table('absencestudent')->join('class','class.id_class', '=', 'absencestudent.id_class')->join('majors' ,'majors.id', '=', 'absencestudent.id_majors')->select(DB::raw('count(*) as count, absencestudent.status'))->groupBy('absencestudent.status')->where('absencestudent.date', 'LIKE', '%'.$date.'%')->where('majors.name_majors', '=', $majorsParams)->where('class.name_class', '=', $classParams)->where('absencestudent.letter', '=', $letterParams)->orderBy('absencestudent.status', 'asc')->get();
        
-        $tableAbsence = DB::table('absence')->join('class', 'class.id_class', '=', 'absence.id_class')->join('users', 'users.nik', '=', 'absence.nik')->join('majors', 'majors.id', '=', 'absence.id_majors')->select('users.*', 'absence.*', 'majors.*', 'class.*')->where('date', 'LIKE', '%'.$date.'%')->where('users.letter', '=', $letterParams)->get();
+        $tableAbsence = DB::table('absencestudent')->join('class', 'class.id_class', '=', 'absencestudent.id_class')->join('users', 'users.nik', '=', 'absencestudent.nik')->join('majors', 'majors.id', '=', 'absencestudent.id_majors')->select('users.*', 'absencestudent.*', 'majors.*', 'class.*')->where('date', 'LIKE', '%'.$date.'%')->where('users.letter', '=', $letterParams)->get();
         return view('Absence', ['class' => $class, 'majors' => $majors, 'tableAbsence' => $tableAbsence, 'absence' => $absence, 'date' => $date, 'majorsParams' => $majorsParams, 'classParams' => $classParams, 'letter' => $letter, 'letterParams' => $letterParams]);
     }
 
@@ -33,7 +33,7 @@ class AbsenceController extends Controller
      */
     public function create($nip, $majors, $class, $letter)
     {
-        DB::table('absence')->insert(
+        DB::table('absencestudent')->insert(
             ['nik' => $nip, 'date' => Date('Y-m-d'), 'id_majors' => $majors, 'id_class' => $class, 'status' => 'masuk', 'letter' => $letter]
         );
     }
