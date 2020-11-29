@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use DB;
 
-
-class AuthController extends Controller
+class uploadSemesterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +13,7 @@ class AuthController extends Controller
      */
     public function index()
     {
-        return view('login');
+        return view('');
     }
 
     /**
@@ -24,10 +21,9 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function user()
+    public function create()
     {
-        $data = DB::table('users')->get();
-        return view('User', ['data' => $data]);
+        //
     }
 
     /**
@@ -38,17 +34,7 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        $auth = DB::table('users')->where('nik', $request->nik)->get();
-        if (count($auth) == null) {
-            return redirect('/')->with(['error' => 'Belum Terdaftar']);
-        }else{
-            foreach ($auth as $key) {
-                $session = $request->session()->put('auth', $key);
-                return redirect('/Admin?date='.Date("Y-m-d").'&majors=RPL');
-
-            }
-        }
-        
+        //
     }
 
     /**
@@ -57,10 +43,9 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $request)
+    public function show($id)
     {
-        $request->session()->forget('auth');
-        return redirect('/');
+        //
     }
 
     /**
@@ -69,10 +54,9 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function seeUser($nik)
+    public function edit($id)
     {
-        $data = DB::table('users')->where('nik','=', $nik)->get();
-        return json_encode($data);
+        //
     }
 
     /**
@@ -95,8 +79,6 @@ class AuthController extends Controller
      */
     public function destroy($id)
     {
-        $data = DB::table('users')->where('id_user', '=', $id)->delete();
-
-        return json_encode($data);
+        //
     }
 }

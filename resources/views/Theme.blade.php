@@ -163,7 +163,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <?php if (session('auth')->role == 1 || session('auth')->role == 2): ?>
+          <?php if (session('auth')->role == 1 || session('auth')->role == 2 || session('auth')->role == 3): ?>
             <li class="nav-item">
                 <a href="/Admin?date=<?php echo date('Y-m-d')?>&majors=RPL" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -195,6 +195,18 @@
               <i class="nav-icon far fa-user"></i>
               <p>
                 Menage User
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+
+          <?php if (session('auth')->role == 1): ?>
+            <li class="nav-item">
+            <a href="/jurnalManager" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Jurnal Menager
              
               </p>
             </a>

@@ -3,14 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class AbsenTeacherControlller extends Controller
+use DB;
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function indexAPI()
+    {
+        $show = DB::table('room')->get();
+        return response()->json($show, 201);
+    }
+
     public function index()
     {
         //

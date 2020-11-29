@@ -24,5 +24,26 @@ Route::get('/deleteUser/{id}', 'AuthController@destroy');
 Route::get('/createAbsence/{nip}/{majors}/{class}/{letter}', 'AbsenceController@create');
 Route::get('/absence/{nip}', 'AbsenceController@create');
 Route::post('/ProcessLogin', 'AuthController@store');
+Route::get('/print', 'AbsenceController@print');
 
 Route::get('/seeUser/{nik}', 'AuthController@seeUser');
+
+// absen guru
+Route::get('/absenceTeacher', 'AbsenceTeacherController@index');
+Route::get('/absencePostApi/{code}/{nik}/{class}/{jam}/{materi}', 'AbsenceTeacherController@create');
+
+
+
+// room router
+Route::get('/ApiRoom', 'RoomController@indexAPI');
+Route::get('/getRoom', 'RoomController@index');
+
+
+// Jurnal Maanger
+Route::get('/jurnalManager', 'JurnalManagerController@index');
+Route::post('/prosesJurnal', 'JurnalManagerController@create');
+
+
+// Upload semester
+
+Route::get('/uploadSemester', 'uploadSemesterController@index');
