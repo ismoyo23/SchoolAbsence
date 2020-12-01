@@ -1,3 +1,4 @@
+<?php  ?>
 @extends('theme')
 
 @section('container')
@@ -9,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Upload Semester</h1>
+            <h1>Jurnal Manager</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -38,20 +39,37 @@
                  @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Hari dan Tanggal</label>
-                    <input type="date" class="form-control" name="date" id="exampleInputEmail1" placeholder="Enter email">
-                    @error('date')
+                    <label for="exampleInputEmail1">Kode Guru</label>
+                    <input type="number" class="form-control" name="nik" id="exampleInputEmail1" placeholder="Enter email">
+                    @error('nik')
+                        <div class="text-danger">Kode guru tidak boleh kosong</div>
+                    @enderror
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">NUPT</label>
+                    <input type="date" class="form-control" name="nupt" id="exampleInputEmail1" placeholder="Enter email">
+                    @error('nupt')
+                        <div class="text-danger">NUPT tidak boleh kosong</div>
+                    @enderror
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Nama Guru</label>
+                    <input type="text" class="form-control" name="text" id="exampleInputEmail1" placeholder="Enter email">
+                    @error('nupt')
                         <div class="text-danger">Hari tidak boleh kosong</div>
                     @enderror
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Upload</label>
-                    <input type="file" name="upload" class="form-control" id="exampleInputPassword1" placeholder="Kelas">
-                    @error('upload')
-                        <div class="text-danger">File tidak boleh kosong</div>
+                    <label for="exampleInputEmail1">Mapel</label>
+                    <input type="text" class="form-control" name="text" id="exampleInputEmail1" placeholder="Enter email">
+                    @error('nupt')
+                        <div class="text-danger">Hari tidak boleh kosong</div>
                     @enderror
                   </div>
+
           
                 <!-- /.card-body -->
 
@@ -65,36 +83,40 @@
                   <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                    <h3>Semester</h3>
+                    <h3>Jurnal Manager</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                       <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                          <th>Hari Tanggal</th>
-                          <th>Perangkat</th>
+                          <th>Kode Guru</th>
+                          <th>NUPT</th>
+                          <th>Nama Guru</th>
+                          <th>Mapel</th>
                           <th>Tindakan</th>
                         </tr>
                         </thead>
                         <tbody>
                           <?php foreach ($data as $key): ?>
                           <tr>
-                              <td><?php echo date('d F Y', strtotime($key->date)); ?></td>
-                              <td><?php echo $key->upload; ?></td>
+                              <td><?php echo $key->nik ?></td>
+                              <td><?php echo $key->letter; ?></td>
+                              <td><?php echo $key->name_user; ?></td>
+                              <td><?php echo $key->majors; ?></td>
                               <td>
-                              	<a href="{{ url('upload/'.$key->upload) }}" class="btn btn-primary ">Donwload</a>
-                              	<a href="{{ url('/uploadSemesterDelete/'.$key->id) }}" class="btn btn-danger delete-confirm">Hapus</a>
+                              	<a href="{{ url('/teacherDataDelete/'.$key->id_user) }}" class="btn btn-primary ">Donwload</a>
+                              	<a href="{{ url('/uploadSemesterDelete/'.$key->id_user) }}" class="btn btn-danger delete-confirm">Hapus</a>
                               </td>
-                       
-                            
                           </tr>
                           <?php endforeach ?>
                         </tbody>
                         <tfoot>
                         <tr>
-                          <th>Hari Tanggal</th>
-                          <th>Perangkat</th>
+                          <th>Kode Guru</th>
+                          <th>NUPT</th>
+                          <th>Nama Guru</th>
+                          <th>Mapel</th>
                           <th>Tindakan</th>
               
                         </tr>

@@ -47,3 +47,11 @@ Route::post('/prosesJurnal', 'JurnalManagerController@create');
 // Upload semester
 
 Route::get('/uploadSemester', 'uploadSemesterController@index');
+Route::post('/uploadSemester', 'uploadSemesterController@store');
+Route::get('/uploadSemesterDelete/{id}', 'uploadSemesterController@destroy');
+
+// Perangkat Pembelajaran
+Route::get('/uploadPembelajaran', 'LearningUploadController@index');
+
+// Teacher data
+Route::get('/TeacherData', 'TeacherDataController@index');

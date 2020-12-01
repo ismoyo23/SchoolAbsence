@@ -189,12 +189,39 @@
             </a>
           </li>
           <?php endif ?>
+
           <?php if (session('auth')->role == 1): ?>
             <li class="nav-item">
-            <a href="/user" class="nav-link">
-              <i class="nav-icon far fa-user"></i>
+            <a href="/jurnalManager" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
               <p>
-                Menage User
+                Jurnal Mengajar
+                
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+
+
+          <?php if (session('auth')->role == 1 || session('auth')->role == 2): ?>
+            <li class="nav-item">
+            <a href="/uploadSemester" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Upload Semester
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+
+          <?php if (session('auth')->role == 1 || session('auth')->role == 2): ?>
+            <li class="nav-item">
+            <a href="/uploadPembelajaran" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Upload Pembelajaran
              
               </p>
             </a>
@@ -203,10 +230,10 @@
 
           <?php if (session('auth')->role == 1): ?>
             <li class="nav-item">
-            <a href="/jurnalManager" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+            <a href="/user" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
               <p>
-                Jurnal Menager
+                Data Guru
              
               </p>
             </a>

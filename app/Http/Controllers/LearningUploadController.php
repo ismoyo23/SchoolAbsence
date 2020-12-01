@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-
-class uploadSemesterController extends Controller
+class LearningUploadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,8 @@ class uploadSemesterController extends Controller
      */
     public function index()
     {
-        $data = DB::table('uploadlearning')->where('role', 1)->get();
-        return view('uploadSemester', ['data' => $data]);
+        $data = DB::table('uploadlearning')->where('role', 2)->get();
+        return view('LearningUpload', ['data' => $data]);
     }
 
     /**
@@ -36,24 +35,7 @@ class uploadSemesterController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'date' => 'required',
-            'upload' => 'required',
-        ]);
-
-    
-            $upload = $request->file('upload')->getClientOriginalName();
-            $destination = base_path() . '/public/upload';
-            $success = $request->file('upload')->move($destination, $upload);
-
-            if ($success) {
-                DB::table('uploadlearning')->insert(
-                    ['date' => $request->date, 'upload' => $upload, 'role' => 1]
-                );
-
-                return back();
-            }
-        
+        //
     }
 
     /**
@@ -98,7 +80,6 @@ class uploadSemesterController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('uploadlearning')->where('id', $id)->delete();
-        return back();
+        //
     }
 }
