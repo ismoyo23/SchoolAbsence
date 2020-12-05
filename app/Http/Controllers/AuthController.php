@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use DB;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
 
 class AuthController extends Controller
 {
@@ -26,16 +27,40 @@ class AuthController extends Controller
      */
     public function user()
     {
-        $data = DB::table('users')->get();
+        $data = DB::table('users')->get()->where('role', 1);
         return view('User', ['data' => $data]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function add(Request $request)
+    {
+        $validatedData = $request->validate([
+          'name' => 'required',
+          'nupt' => 'required',
+          'nik' => 'required',
+          'mapel' => 'required',
+          
+        ]);
+        $data = DB::table('users')->insert(
+            ['nik' => $request->nik, 'letter' => $request->nupt, 'name_user' => $request->name, 'class' => $request->mapel, 'role' => '1']
+        );
+
+        if ($data) {
+            return back();
+        }
+    }
+
+    public function ImportUser(Request $request)
+    {
+        $this->validate($request, [
+      'select_file'  => 'required|mimes:xls,xlsx'
+     ]);
+
+         Excel::import(new UsersImport, $request->file('select_file')->store('temp'));
+         return back();
+    }
+    
+
+
     public function store(Request $request)
     {
         $auth = DB::table('users')->where('nik', $request->nik)->get();
@@ -75,24 +100,37 @@ class AuthController extends Controller
         return json_encode($data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function showData($id)
     {
-        //
+        $data = DB::table('users')->where('id_user','=', $id)->get();
+        return view('UpdateTeacher', ["data" => $data]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function update(Request $request)
+    {
+        $validatedData = $request->validate([
+          'name' => 'required',
+          'nupt' => 'required',
+          'nik' => 'required',
+          'mapel' => 'required',
+          
+        ]);
+
+        $affected = DB::table('users')
+              ->where('id_user', $request->id)
+              ->update([
+                    'nik' => $request->nik, 'letter' => $request->nupt, 'name_user' => $request->name, 'class' => $request->mapel, 'role' => '1'
+                ]);
+
+              return redirect('user');
+    }
+
+    public function delete($id)
+    {
+        DB::table('users')->where('id_user', '=', $id)->delete();
+        return back();
+    }
+
     public function destroy($id)
     {
         $data = DB::table('users')->where('id_user', '=', $id)->delete();

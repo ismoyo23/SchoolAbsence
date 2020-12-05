@@ -228,7 +228,7 @@
           </li>
           <?php endif ?>
 
-          <?php if (session('auth')->role == 1): ?>
+          <?php if (session('auth')->role == 1 || session('auth')->role == 2): ?>
             <li class="nav-item">
             <a href="/user" class="nav-link">
               <i class="nav-icon far fa-user"></i>
@@ -239,6 +239,20 @@
             </a>
           </li>
           <?php endif ?>
+
+          <?php if (session('auth')->role == 2): ?>
+            <li class="nav-item">
+            <a href="/absenceTeacher?date=2020-12-05&majors=RPL&class=X&letter=A" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Rekup Absensi Guru
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+          
+
           
 
           <li class="nav-item">

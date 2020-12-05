@@ -19,8 +19,6 @@ Route::get('/Admin', 'HomeController@index');
 Route::get('/absence', 'AbsenceController@index');
 Route::get('/absenceGet/{nip}', 'AbsenceController@show');
 Route::get('/change', 'AbsenceController@edit');
-Route::get('/user', 'AuthController@user');
-Route::get('/deleteUser/{id}', 'AuthController@destroy');
 Route::get('/createAbsence/{nip}/{majors}/{class}/{letter}', 'AbsenceController@create');
 Route::get('/absence/{nip}', 'AbsenceController@create');
 Route::post('/ProcessLogin', 'AuthController@store');
@@ -39,7 +37,7 @@ Route::get('/ApiRoom', 'RoomController@indexAPI');
 Route::get('/getRoom', 'RoomController@index');
 
 
-// Jurnal Maanger
+// Jurnal Mengajar
 Route::get('/jurnalManager', 'JurnalManagerController@index');
 Route::post('/prosesJurnal', 'JurnalManagerController@create');
 
@@ -54,4 +52,10 @@ Route::get('/uploadSemesterDelete/{id}', 'uploadSemesterController@destroy');
 Route::get('/uploadPembelajaran', 'LearningUploadController@index');
 
 // Teacher data
-Route::get('/TeacherData', 'TeacherDataController@index');
+Route::get('/user', 'AuthController@user');
+Route::post('/addUser', 'AuthController@add');
+Route::post('/import', 'AuthController@ImportUser');
+Route::get('/deleteUser/{id}', 'AuthController@destroy');
+Route::get('/deleteTeacher/{id}', 'AuthController@delete');
+Route::get('/showDataTeacher/{id}', 'AuthController@showData');
+Route::post('/updateDataTeacher', 'AuthController@update');

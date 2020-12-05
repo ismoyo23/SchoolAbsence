@@ -11,18 +11,10 @@ class AbsenceTeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        $date = $request->input('date');
-        $majorsParams = $request->input('majors');
-        $classParams = $request->input('class');
-        $letterParams = $request->input('letter');
-        $class = DB::table('class')->get();
-        $majors = DB::table('majors')->get();
-        $letter = DB::table('letter')->get();
-        $tableAbsence = DB::table('absencestudent')->join('class', 'class.id_class', '=', 'absencestudent.id_class')->join('users', 'users.nik', '=', 'absencestudent.nik')->join('majors', 'majors.id', '=', 'absencestudent.id_majors')->select(DB::raw('count(*) as count, absencestudent.*'))->groupBy('absencestudent.status')->where('date', 'LIKE', '%'.$date.'%')->where('users.letter', '=', $letterParams)->get();
-
-        return view('AbsenceTeacher', ['class' => $class, 'majors' => $majors, 'tableAbsence' => $tableAbsence, 'date' => $date, 'majorsParams' => $majorsParams, 'classParams' => $classParams, 'letter' => $letter, 'letterParams' => $letterParams]);
+    public function index()
+    {   
+        $data = DB::table('users')->get();
+        return view('AbsenceTeacher', ['data' => $data]);
     }
 
     /**
