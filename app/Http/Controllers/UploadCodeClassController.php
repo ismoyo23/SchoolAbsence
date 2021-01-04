@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-class AbsenceTeacherController extends Controller
+
+class UploadCodeClassController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {   
-        $date = $request->input('date');
-        $absence = DB::table('absencetheacher')->join('users', 'users.nik', '=', 'absencetheacher.nik')->select(DB::raw('count(*) as count, absencetheacher.status'))->groupBy('absencetheacher.status')->where('absencetheacher.created_at', 'LIKE', '%'.$date.'%')->get();
-        $data = DB::table('absencetheacher')->join('users', 'users.nik', '=', 'absencetheacher.nik')->select('users.*', 'absencetheacher.*')->where('absencetheacher.created_at', 'LIKE', '%'.$date.'%')->get();
-        return view('AbsenceTeacher', ['data' => $data, 'absence' => $absence, 'date' => $date]);
+    public function index()
+    {
+        
+        $data = DB::table('room')->get();
+        return view('UploadCodeClass', ['data' => $data]);
     }
 
     /**
@@ -24,12 +24,13 @@ class AbsenceTeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($code, $nik, $class, $jam, $materi, $status)
+    public function create(Request $request)
     {
-        $data = DB::table('absencetheacher')->insert(
-            ['code_room' => $code, 'status' => $status, 'class' => $class, 'nik' => $nik, 'jam_ke' => $jam, 'materi' => $materi]
-        );
-        return response()->json($data, 201);
+        DB::table('room')->insert([
+            'code_room' => $request->code_room
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -51,9 +52,8 @@ class AbsenceTeacherController extends Controller
      */
     public function show(Request $request)
     {
-        $date = $request->input('date');
-        $data = DB::table('absencetheacher')->join('users', 'users.nik', '=', 'absencetheacher.nik')->select('users.*', 'absencetheacher.*')->where('absencetheacher.created_at', 'LIKE', '%'.$date.'%')->get();
-        return view('PrintAbsensiGuru', ['data' => $data]);
+        $qr = $request->input('QR');
+        return view('DonwloadQR', ['qr' => $qr]);
     }
 
     /**

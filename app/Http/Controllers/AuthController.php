@@ -69,12 +69,18 @@ class AuthController extends Controller
         }else{
             foreach ($auth as $key) {
                 $session = $request->session()->put('auth', $key);
+
+              if ($key->role == 0) {
+                return redirect('/PantauSiswa');
+              }else{
                 return redirect('/Admin?date='.Date("Y-m-d").'&majors=RPL');
+                }
+              }
 
             }
         }
         
-    }
+    
 
     /**
      * Display the specified resource.

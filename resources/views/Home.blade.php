@@ -146,7 +146,7 @@
     var donutData        = {
       labels: [
         <?php foreach ($absenceCount as $class): ?>
-          `<?php echo $class->name_class?>`,
+          `<?php echo $class->id_class?>`,
         <?php endforeach ?>
       ],
       datasets: [
@@ -254,7 +254,7 @@
     var donutData        = {
       labels: [
         <?php foreach ($absenceCount as $class): ?>
-          `<?php echo $class->name_class?>`
+          `<?php echo $class->id_class?>`
         <?php endforeach ?>
       ],
       datasets: [

@@ -63,7 +63,7 @@
                         
                         </div>
                         <div class="col-md-3">
-                        <select style='margin-top: 30px' name='majors' class="form-control" id="exampleFormControlSelect1">
+                        <select style='margin-top: 30px' name='letter' class="form-control" id="exampleFormControlSelect1">
                           <?php foreach ($letter as $key): ?>
                             <?php if ($key->letter == $letterParams): ?>
                               <option selected><?php echo $key->letter; ?></option>
@@ -125,31 +125,46 @@
                     <th>Foto</th>
                     <th>Nisn</th>
                     <th>Nama</th>
-                    <th>Jurusan</th>
                     <th>Kelas</th>
+                    <th>Jurusan</th>
+                    
                     <th>Status</th>
+                    <th>Tindakan</th>
                    
                   </tr>
                   </thead>
                   <tbody> 
-                  <tr>  
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                 <?php foreach ($tableAbsence as $key): ?>
+                  
+                    <tr>
+                    <td><img style="width: 100px;" src="{{ url('image') }}/<?php echo $key->image ?>"></td>
+                    <td><?php echo $key->nik; ?>
+                    </td>
+                    <td><?php echo $key->name_user; ?></td>
+                    <td><?php echo $key->id_class?></td>
+                    <td><?php echo $key->id_majors; ?> <?php echo $key->letter?> </td>
+                    
+                    <td><span href="#" class="badge badge-info"><?php echo $key->status; ?></span></td>
+                    <td>
+                      <a href="/change?status=Masuk&id=<?php echo $key->id_absence; ?>&date=<?php echo $date; ?>&majors=<?php echo $majorsParams; ?>&class=<?php echo $classParams; ?>" class="badge badge-primary">Masuk</a> 
+                      <a href="/change?status=Izin&id=<?php echo $key->id_absence; ?>&date=<?php echo $date; ?>&majors=<?php echo $majorsParams; ?>&class=<?php echo $classParams; ?>" class="badge badge-success">Izin</a>
+                      <a href="/change?status=Sakit&id=<?php echo $key->id_absence; ?>&date=<?php echo $date; ?>&majors=<?php echo $majorsParams; ?>&class=<?php echo $classParams; ?>" class="badge badge-warning">Sakit</a>
+                      <a href="/change?status=Alva&id=<?php echo $key->id_absence; ?>&date=<?php echo $date; ?>&majors=<?php echo $majorsParams; ?>&class=<?php echo $classParams; ?>" class="badge badge-danger">Alva</a>
+                    </td>
+               
                   </tr>
-
+                  <?php endforeach ?>
                   </tbody>
                   <tfoot>
                   <tr>
                     <th>Foto</th>
                     <th>Nisn</th>
                     <th>Nama</th>
-                    <th>Jurusan</th>
                     <th>Kelas</th>
+                    <th>Jurusan</th>
+                    
                     <th>Status</th>
+                    <th>Tidakan</th>
                   </tr>
                   </tfoot>
                 </table>

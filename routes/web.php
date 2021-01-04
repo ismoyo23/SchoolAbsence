@@ -28,7 +28,8 @@ Route::get('/seeUser/{nik}', 'AuthController@seeUser');
 
 // absen guru
 Route::get('/absenceTeacher', 'AbsenceTeacherController@index');
-Route::get('/absencePostApi/{code}/{nik}/{class}/{jam}/{materi}', 'AbsenceTeacherController@create');
+Route::get('/absencePostApi/{code}/{nik}/{class}/{jam}/{materi}/{status}', 'AbsenceTeacherController@create');
+Route::get('/printTeacher', 'AbsenceTeacherController@show');
 
 
 
@@ -59,3 +60,31 @@ Route::get('/deleteUser/{id}', 'AuthController@destroy');
 Route::get('/deleteTeacher/{id}', 'AuthController@delete');
 Route::get('/showDataTeacher/{id}', 'AuthController@showData');
 Route::post('/updateDataTeacher', 'AuthController@update');
+
+
+// Upload Code Class
+Route::get('/uploadCodeClass', 'UploadCodeClassController@index');
+Route::post('/uploadCodeClass', 'UploadCodeClassController@create');
+Route::get('/DonwloadQR', 'UploadCodeClassController@show');
+ 
+// Monitoring Teacher
+Route::get('/MonitoringTeacher', 'MonitoringTeacherController@index');
+
+
+// Orang Tua
+Route::get('/ManageOrtu', 'ManageOrtuController@index');
+Route::post('/ManageOrtu', 'ManageOrtuController@store');
+Route::get('/ManageOrtuDelete/{id}', 'ManageOrtuController@destroy');
+Route::get('/ManageOrtuShow/{id}', 'ManageOrtuController@show');
+Route::post('/ManageOrtuUpdate/{id}', 'ManageOrtuController@update');
+
+
+// Pantau Siswa
+Route::get('/PantauSiswa', 'PantauSiswaController@index');
+
+
+// Penilaian Siswa
+Route::get('/PenilaianSiswa', 'PenilaianSiswaController@index');
+Route::post('/PenilaianSiswa', 'PenilaianSiswaController@store');
+Route::get('/PenilaianSiswa/{id}', 'PenilaianSiswaController@show');
+Route::post('/PenilaianSiswaUpdate', 'PenilaianSiswaController@update');

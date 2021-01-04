@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +14,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ url('dist/css/adminlte.min.css') }}">
     <!-- DataTables -->
+    <link rel="stylesheet" href="{{ url('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
@@ -163,7 +167,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <?php if (session('auth')->role == 1 || session('auth')->role == 2 || session('auth')->role == 3): ?>
+          <?php if (session('auth')->role == 1 || session('auth')->role == 2): ?>
             <li class="nav-item">
                 <a href="/Admin?date=<?php echo date('Y-m-d')?>&majors=RPL" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -176,7 +180,7 @@
           <?php endif ?>
           
 
-        <?php if (session('auth')->role == 1 || session('auth')->role == 2 || session('auth')->role == 3): ?>
+        <?php if (session('auth')->role == 1 || session('auth')->role == 2): ?>
           
     
           <li class="nav-item">
@@ -190,7 +194,7 @@
           </li>
           <?php endif ?>
 
-          <?php if (session('auth')->role == 1): ?>
+          <?php if (session('auth')->role == 1 || session('auth')->role == 2): ?>
             <li class="nav-item">
             <a href="/jurnalManager" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -228,7 +232,7 @@
           </li>
           <?php endif ?>
 
-          <?php if (session('auth')->role == 1 || session('auth')->role == 2): ?>
+          <?php if (session('auth')->role == 2): ?>
             <li class="nav-item">
             <a href="/user" class="nav-link">
               <i class="nav-icon far fa-user"></i>
@@ -242,10 +246,83 @@
 
           <?php if (session('auth')->role == 2): ?>
             <li class="nav-item">
-            <a href="/absenceTeacher?date=2020-12-05&majors=RPL&class=X&letter=A" class="nav-link">
+            <a href="/absenceTeacher?date=<?php echo date("Y-m-d") ?>" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Rekup Absensi Guru
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+
+          <?php if (session('auth')->role == 2): ?>
+            <li class="nav-item">
+            <a href="/uploadCodeClass" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Upload Kode Kelas
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+
+          <?php if (session('auth')->role == 2): ?>
+            <li class="nav-item">
+            <a href="/MonitoringTeacher" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Monitoring Guru
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+
+          <?php if (session('auth')->role == 2): ?>
+            <li class="nav-item">
+            <a href="/ManageOrtu" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Manage Orang Tua
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+
+          <?php if (session('auth')->role == 0): ?>
+            <li class="nav-item">
+            <a href="/PantauSiswa" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Pantau Siswa
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+
+          <?php if (session('auth')->role == 0 || session('auth')->role == 2 || session('auth')->role ==1): ?>
+            <li class="nav-item">
+            <a href="/PenilaianSiswa?semester=Semua Semester" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Penilaian Siswa
+             
+              </p>
+            </a>
+          </li>
+          <?php endif ?>
+
+          <?php if (session('auth')->role == 0 || session('auth')->role == 2 || session('auth')->role ==1): ?>
+            <li class="nav-item">
+            <a href="/PenilaianSiswa
+            " class="nav-link">
+              <i class="nav-icon fa fa-window-close"></i>
+              <p>
+                Pelanggaran
              
               </p>
             </a>

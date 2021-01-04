@@ -5,31 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-
-class HomeController extends Controller
+class MonitoringTeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {   
-        if (session('auth') == null) {
-            return redirect('/');
-        }else{
-            if (session('auth')->role == 1 || session('auth')->role == 2 || session('auth')->role == 3) {
-                $majors = $request->input('majors');
-                $date = $request->input('date');
-                $data = DB::table('majors')->get();
-                $absenceCount = DB::table('absencestudent')->join('users', 'users.nik', '=', 'absencestudent.nik')->select(DB::raw('count(*) as count, absencestudent.id_class'))->groupBy('absencestudent.id_class')->where('absencestudent.date', 'LIKE', '%'.$date.'%')->where('status', '=', 'masuk')->where('absencestudent.id_majors', $majors)->get();
-                return view('Home', ['data' => $data, 'date' => $date, 'majors' => $majors, 'absenceCount' => $absenceCount]);
-        }else{
-                return redirect('/')->with(['error' => 'Akses di tolak']);;
-            }
-        }
-        
-        
+    public function index()
+    {
+        $data = DB::table('absencetheacher')->join('users', 'users.nik', '=', 'absencetheacher.nik')->select('users.*', 'absencetheacher.*')->where('absencetheacher.status', 'Terlambat')->where('absencetheacher.created_at', 'LIKE', '%'.date('Y-m-d').'%')->orderBy('absencetheacher.created_at', 'DESC')->get();
+        return view('MonitoringTeacher', ['data' => $data]);
     }
 
     /**
@@ -39,8 +25,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-
-        
+        //
     }
 
     /**
@@ -71,12 +56,9 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        DB::table('absencestudent')
-              ->where('id', $request->status)
-              ->update(['status' => $request->id]);
-        return redirect('/absence?'.$request->date);
+        //
     }
 
     /**

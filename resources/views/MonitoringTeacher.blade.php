@@ -1,3 +1,4 @@
+<?php  ?>
 @extends('theme')
 
 @section('container')
@@ -23,44 +24,13 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-           <div class="card">
-               <div class="card-body">
-              <div class="form-group">
-                <div class="row">
-                    <div class="col-md-12">
-                    <div class='row'>
-                 
-
-                        
-                        
-                        <div class="col-md-4" style='margin-top: 30px'>
-                        <form action=''>
-                        <div class="form-group">
-                        <div class='row'>
-                          <input type="date" style='width: 300px;' name='date' data-date-format="Y-m-d" value="<?php echo $date; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          <button type="submit" class="btn btn-light"><i class="fa fa-search" aria-hidden="true"></i></button>
-                          </div>
-                          </div>
-                          </form>
-                        </div>
-               
-                        
-                          </div>
-                      </div>
-
-                    
-                </div>
-                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-              <!-- /.card-body -->
-            </div>
-          </div>
+           
           <div class="col-12">
             <div class="card">
               <div class="card-header">
               <div class="row">
                 <h3>Table Absensi</h3>
-                <a target="_blank" style="margin-left: 12px" href="{{ url('/printTeacher?date=') }}<?php echo $date; ?>" class="btn btn-primary">Print</a>
+              
               </div>
               </div>
               <!-- /.card-header -->
@@ -74,6 +44,7 @@
                     <th>Kelas</th>
                     <th>Jam</th>
                     <th>Materi</th>
+                    <th>Status</th>
                     
                   </tr>
                   </thead>
@@ -88,6 +59,7 @@
                     <td><?php echo $key->class; ?></td>
                     <td><?php echo $key->jam_ke; ?></td>
                     <td><?php echo $key->materi; ?></td>
+                    <td><?php echo $key->status; ?></td>
                     
                   </tr>
                 <?php endforeach ?>
@@ -103,6 +75,7 @@
                     <th>Kelas</th>
                     <th>Jam</th>
                     <th>Materi</th>
+                    <th>Status</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -154,36 +127,6 @@
 <script>
   $(function () {
 
-     var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    var donutData        = {
-      labels: [
-      <?php foreach ($absence as $key): ?>
-        '<?php echo $key->status; ?>',
-      <?php endforeach ?>
-      ],
-      datasets: [
-        {
-          data: [
-           <?php foreach ($absence as $key): ?>
-              '<?php echo $key->count; ?>',
-          <?php endforeach ?>
-          ],
-          backgroundColor : [ ' #33cc33','#ff3333','#0073e6', '#f39c12', '#3c8dbc', '#d2d6de'],
-        }
-      ]
-    }
-    var donutOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    var donutChart = new Chart(donutChartCanvas, {
-      type: 'doughnut',
-      data: donutData,
-      options: donutOptions
-    })
-
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
@@ -198,6 +141,10 @@
       "responsive": true,
     });
 
+
+  setInterval(function(){
+      window.location.reload();
+   }, 3600000);
     
     
   });
