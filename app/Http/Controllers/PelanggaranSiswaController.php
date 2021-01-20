@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 
-class JurnalManagerController extends Controller
+class PelanggaranSiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,7 @@ class JurnalManagerController extends Controller
      */
     public function index()
     {
-        $user = DB::table('users')->where('role', 0)->get();
-        $data = DB::table('teachingjurnal')->get();
-        return view('JurnalManager', ['data' => $data, 'user' => $user]);
+        return view('PelanggaranSiswa');
     }
 
     /**
@@ -24,25 +21,21 @@ class JurnalManagerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-
-        $request->validate([
-            'date' => 'required',
-            'class' => 'required',
-            'mapel' => 'required',
-            'codeKD' => 'required',
-            'subjeckMatter' => 'required',
-            'information' => 'required',
-        ]);
-
-        DB::table('teachingjurnal')->insert(
-            ['name_user' => $request->name_user , 'date' => $request->date, 'class' => $request->class, 'nameTeacher' => $request->nameTeacher,'mapel' => $request->mapel, 'codeKD' => $request->codeKD, 'subjeckMatter' => $request->subjeckMatter, 'information' => $request->information]
-        );
-
-        return redirect('jurnalManager');
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
 
     /**
      * Display the specified resource.

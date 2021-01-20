@@ -131,9 +131,7 @@
                         </select>
                       </div>
 
-                      <?php if (): ?>
-                        
-                      <?php endif ?>
+                    
 
                       <input style="margin-left: 21px; height: 42px;" type="submit" class="btn btn-primary" value="Filter">
                       </form>

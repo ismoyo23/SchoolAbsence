@@ -88,3 +88,7 @@ Route::get('/PenilaianSiswa', 'PenilaianSiswaController@index');
 Route::post('/PenilaianSiswa', 'PenilaianSiswaController@store');
 Route::get('/PenilaianSiswa/{id}', 'PenilaianSiswaController@show');
 Route::post('/PenilaianSiswaUpdate', 'PenilaianSiswaController@update');
+
+
+// pelaanggaran siswa
+Route::get('/PelanggaranSiswa', 'PelanggaranSiswaController@index');

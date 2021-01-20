@@ -318,7 +318,7 @@
 
           <?php if (session('auth')->role == 0 || session('auth')->role == 2 || session('auth')->role ==1): ?>
             <li class="nav-item">
-            <a href="/PenilaianSiswa
+            <a href="/PelanggaranSiswa
             " class="nav-link">
               <i class="nav-icon fa fa-window-close"></i>
               <p>

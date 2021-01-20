@@ -25,7 +25,7 @@ class PenilaianSiswaController extends Controller
         $class = DB::table('class')->get();
         $majors = DB::table('majors')->get();
         $letter = DB::table('letter')->get();
-        return view('PenilaianSiswa', ['data' => $data, 'student' => $student, 'array' => $array, 'semester' => $semesterParams, 'class' => $class, 'majors' => $majors, 'letter' => $letter]);
+        return view('PenilaianSiswa', ['data' => $data, 'student' => $student, 'array' => $array, 'semester' => $semesterParams, 'class' => $class, 'majors' => $majors, 'letter' => $letter, 'letterParams' => $letterParams, 'classParams' => $classParams, 'majorsParams' => $majorsParams]);
     }
 
     /**
